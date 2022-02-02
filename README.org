@@ -76,7 +76,7 @@ DEEPL_PASS=XXXXXXXXXXXXXXX
    A typical help command output looks like this:
 
    Output of ~help~
-#+begin_verse
+#+begin_example
 This bot can be used to manage/view the assignments of the works. and many other functions.
 Available commands:
 check - checks if the new episode is out or not.
@@ -93,13 +93,13 @@ mtl - Downloads the chapter and uploads a mtl from ncode website.
 ncode - Download the chapter from ncode website
 ocr - Performs OCR on the uploaded image, by default assumes Japanese texts in vertical layout.
 roast - roast someone or get roasted by the bot.
-#+end_verse
+#+end_example
 
 Output of ~help help~
-#+begin_verse
+#+begin_example
 The help message with available commands for the bot.
 Usage: help <topic>
 Arguments:
     <topic> : Can be any command or non for brief help of all commands.
 e.g: help help; help add; etc.
-#+end_verse
+#+end_example
