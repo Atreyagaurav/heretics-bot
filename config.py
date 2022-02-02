@@ -17,10 +17,14 @@ temp_file = os.path.join(root_path, '.temp_file')
 status_file = os.path.join(root_path, 'tables/status.json')
 kanji_exe = os.path.join(root_path, 'kanji')
 
-#inform_guilds = [int(os.getenv('TEST_GUILD_ID'))]  # my test server
+BOT_ID = int(os.getenv('BOT_ID'))
+
+# The dictionary is in the format {GuildID: string to mention the role
+# for new chapter}
 inform_guilds = {int(os.getenv('HERETIC_GUILD_ID')):"<@&846779183303491625>",
                  int(os.getenv('WCT_GUID_ID')):"<@&930628842270359604>",
                  int(os.getenv('HERETIC_PUBLIC_GUILD_ID')):""}  # Heretics
+
 admin_guilds = [int(os.getenv('HERETIC_GUILD_ID')), int(os.getenv('WCT_GUID_ID'))]  # Heretics
 privileged_guilds = [int(os.getenv('HERETIC_PUBLIC_GUILD_ID'))]
 

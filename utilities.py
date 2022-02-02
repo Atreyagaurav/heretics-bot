@@ -43,7 +43,7 @@ def is_admin(message):
         is_admin = True
 
     # bot's userID to be able to give itself admin command evereywhere.
-    if message.author.id == int(os.getenv('BOT_ID')):
+    if message.author.id == config.BOT_ID:
         # if I want to test as non admin user then `B!` will work.
         if message.content[0] == 'B':
             is_admin = False

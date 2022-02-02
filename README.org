@@ -1,0 +1,105 @@
+* Translation Bot
+
+** Introduction
+   This bot was made as a helper for mtl translation and assignments of tasks for [[https://www.heretictranslations.com/][Heretics Translation]] group.
+
+   Since it was made with intention to use in our private server, we didn't make any README, I'm adding the instructions now we have this code public so other people can also use this code if they want to use the bot, or use some code as standalone scripts.
+
+  
+** Requirements
+
+   Python libraries that are required can be installed from the ~requirements.txt~ file.
+
+  #+begin_src bash
+pip install -r requirements.txt
+  #+end_src
+  
+  Other 3rd party programs that are required are as follows:
+
+  | commands  | Required program | Function                                            |
+  | OCR       | [[https://github.com/tesseract-ocr/tesseract][tesseract]]        | OCR of images to text in jp                         |
+  | mtl/deepl | [[https://github.com/mozilla/geckodriver/releases][geckodriver]]      | Use Selenium to translate jp to english using deepl |
+
+** Environment File
+   You will need the ~.env~ file with the following contents to make sure the bot has enough information to connect to the discord.
+
+   Make sure it either has correct values, or if you want to put dummy values, the values for IDs (BOT and GUILDs) needs to be integer. 
+
+#+begin_src bash
+# Discord token for connection of discord client
+DISCORD_TOKEN=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+# bot id to check if the message is by the bot itself or not. And to
+# give it admin status
+BOT_ID=XXXXXXXXXXXXXXXXXX
+
+# GUILD IDS for servers, change names in the config.py too.
+HERETIC_GUILD_ID=XXXXXXXXXXXXXXXXXX
+WCT_GUID_ID=XXXXXXXXXXXXXXXXXX
+HERETIC_PUBLIC_GUILD_ID=XXXXXXXXXXXXXXXXXX
+TEST_GUILD_ID=XXXXXXXXXXXXXXXXXX
+
+# Deepl account information (currently unused)
+DEEPL_EMAIL=XXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+DEEPL_PASS=XXXXXXXXXXXXXXX
+#+end_src
+
+** Config file
+   The config are mostly in the ~config.py~ file.
+
+   The ~bot_pattern~ variable is the regex to read the bot command, you can change that to use different pattern.
+   
+   The information in the ~config.py~ file are mostly the file paths and the names of the environmental variables and so on. There is also roles to mention in case of new chapter alert, and roles that are considered admin, or for give privilege to use a specific command only. 
+
+*NOTE*: You can edit it in a way just changing the .env was what's needed. and make a pull request. It's just what was easy when it was a single server, then I just kept adding more information like this.
+
+
+** Scripts
+   There are few files that can be used as scripts, as they are, or can be made into scripts(denoted by *). For how to use them, look at their help message, or main function inside the code.
+
+   | Script          | Function                                                           |
+   | deepl.py        | Make mtls from the deepl website                                   |
+   | replacements.py | Replace the jp terms/names-honorifics to make a preprocessed text. |
+   | jisho.py*       | Make a html with given chapter text with furigana added from jisho |
+   | kanji (.cpp)    | OCR with tesseract but filtered to recognize kanji only            |
+
+   
+** Commands
+   As for the commands available, most commands are included in the help messages, as well as have detailed documentations inside the code itself that can be accessed from ~help <command>~.
+
+   There are 3 types of commands, ~admin_commands~, ~privileged_commands~, ~commands~, each are defined in their own file.
+
+   Without any settings, a server can only use the commands in the last category. Admin people, with role, or everyone in admin server, can access the first commands. While second command only works for privileged servers with appropriate roles.
+
+   The help command will also only show the commands with appropriate permissions. (Not sure it checks for roles though.)
+
+   A typical help command output looks like this:
+
+   Output of ~help~
+#+begin_verse
+This bot can be used to manage/view the assignments of the works. and many other functions.
+Available commands:
+check - checks if the new episode is out or not.
+dark - gives a link to the dark website curresponsing to the heretics website link.
+deepl - Uses deepl website to translate a plain text file.
+diff - Checks if the given chapter had had any revisions since the last check.
+hello - Hello message back to the user.
+help - The help message with available commands for the bot.
+ip - Gives the IP address of the bot to ssh into it.
+joke - Get random jokes to lighten the channel.
+kanji - Performs OCR on the uploaded image to find possible Japanese characters.
+message - this function is to reply any messages that are not associated with
+mtl - Downloads the chapter and uploads a mtl from ncode website.
+ncode - Download the chapter from ncode website
+ocr - Performs OCR on the uploaded image, by default assumes Japanese texts in vertical layout.
+roast - roast someone or get roasted by the bot.
+#+end_verse
+
+Output of ~help help~
+#+begin_verse
+The help message with available commands for the bot.
+Usage: help <topic>
+Arguments:
+    <topic> : Can be any command or non for brief help of all commands.
+e.g: help help; help add; etc.
+#+end_verse
